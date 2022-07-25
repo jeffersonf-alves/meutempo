@@ -15,7 +15,10 @@
             </div>
         </div>
         <div class="sub-header">
-            <p>{{ localizacao }} / {{ temperaturaRecente }}</p>
+            <div>
+                <img class="icon" src="../assets/icons/cloud-drizzle.svg" :alt="altIcon" width="35px" height="35px">
+                <p>{{ localizacao }} / {{ temperaturaRecente }}</p>
+            </div>
         </div>
     </div>
 </template>>
@@ -28,16 +31,12 @@ export default {
             localizacao: 'São Bernardo do Campo-SP',
             temperaturaRecente: 20,
             chanceDeChuva: 30,
-            icon: ''
+            icon:'../assets/icons/cloud-drizzle.svg',
+            altIcon: 'Dia de Sol'
         }
     },
     methods:  {
-        changeIcon() {
-            if(this.chanceDeChuva <= 30) {
-                this.icon = ''
-            }
-
-        }
+        
     }
     
 }
@@ -87,7 +86,12 @@ export default {
         align-items: center;
         font-size: 20px;
     }
-    .sub-header p {
-        padding-left: 14%;
+    .sub-header div {
+        display: flex;
+        align-items: center;
+        padding-left: 13%;
+    }
+    .icon {
+        padding-right: 6px;
     }
 </style>
