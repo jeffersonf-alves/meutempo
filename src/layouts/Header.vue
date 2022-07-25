@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="header">
         <div class="header">
             <div class="content-search">
                 <input type="text" placeholder="Buscar por cidade...">
@@ -16,7 +16,7 @@
         </div>
         <div class="sub-header">
             <div>
-                <img class="icon" src="../assets/icons/cloud-drizzle.svg" :alt="altIcon" width="35px" height="35px">
+                <img class="icon" :src="changeIcon()"  width="35px" height="35px">
                 <p>{{ localizacao }} / {{ temperaturaRecente }}</p>
             </div>
         </div>
@@ -26,17 +26,24 @@
 <script>
 
 export default {
+    el: '#header',
     data() {
         return {
             localizacao: 'São Bernardo do Campo-SP',
             temperaturaRecente: 20,
             chanceDeChuva: 30,
-            icon:'../assets/icons/cloud-drizzle.svg',
-            altIcon: 'Dia de Sol'
+            icon: require('@/assets/icons/cloud-drizzle.svg'),
         }
     },
     methods:  {
-        
+        changeIcon() {
+            if(this.chanceDeChuva <= 30) {
+                this.icon = require('@/assets/icons/cloud-sun.svg')
+            }else if(this.chanceDeChuva > 30 && this.chanceDeChuva <= 50) {
+                this.icon = require('@/assets/icons/cloud-drizzle.svg')
+            }
+            return this.icon
+        }
     }
     
 }
