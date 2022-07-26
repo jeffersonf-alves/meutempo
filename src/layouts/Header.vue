@@ -1,5 +1,5 @@
 <template>
-    <div id="header">
+    <div>
         <div class="header">
             <div class="content-search">
                 <input type="text" placeholder="Buscar por cidade...">
@@ -26,13 +26,15 @@
 <script>
 
 export default {
-    el: '#header',
     data() {
         return {
             localizacao: 'São Bernardo do Campo-SP',
             temperaturaRecente: 20,
             chanceDeChuva: 30,
             icon: require('@/assets/icons/cloud-drizzle.svg'),
+            gettingLocation: '',
+            errorStr: '',
+            options: ''
         }
     },
     methods:  {
@@ -44,9 +46,23 @@ export default {
             }
             return this.icon
         }
+    },
+    created() {
+        if("geolocation" in navigator) {
+            const successCallback = (position)=> {
+                console.log(position)
+            }
+            const errorCallback = (error) => {
+                console.error(error)
+            }
+            navigator.geolocation.getCurrentPosition(successCallback, errorCallback)
+        } else {
+            alert("Não funciona!!")
+        }
+
     }
-    
 }
+
 </script>
 
 <style scoped>
